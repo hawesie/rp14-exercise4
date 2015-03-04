@@ -49,6 +49,8 @@ public class LineMapVisualisation extends JComponent {
 	private final LineMap m_lineMap;
 
 	private final float m_scaleFactor;
+	
+	private final boolean m_flip;
 
 	private Line[] m_translatedLines;
 
@@ -59,8 +61,9 @@ public class LineMapVisualisation extends JComponent {
 			1);
 
 	private LineMapVisualisation(int _width, int _height, LineMap _lineMap,
-			float _scaleFactor) {
+			float _scaleFactor, boolean _flip) {
 
+		m_flip = _flip;	
 		m_scaleFactor = _scaleFactor;
 		m_worldDimensions = new Rectangle(scale(_width), scale(_height));
 		m_visualisationDimensions = new Rectangle(_width + (2 * X_MARGIN),
@@ -151,8 +154,14 @@ public class LineMapVisualisation extends JComponent {
 		g2.setPaint(Color.WHITE);
 		g2.fill(rectFill);
 
+		if(m_flip) {
+			int height = getHeight() / 2;
+			g2.translate(0, height);
+			g2.scale(1, -1);
+			g2.translate(0, -height);
+		}
+		
 		renderMap(g2);
-
 	}
 
 	protected void renderMap(Graphics2D g2) {
