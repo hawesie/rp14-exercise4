@@ -26,8 +26,8 @@ public class GridMapVisualisation extends LineMapVisualisation {
 	protected IGridMap m_gridMap;
 	protected List<Node<Point>> path;
 
-	public GridMapVisualisation(IGridMap _gridMap, LineMap _lineMap, float _scaleFactor) {
-		super(_lineMap, _scaleFactor);
+	public GridMapVisualisation(IGridMap _gridMap, LineMap _lineMap, float _scaleFactor, boolean _flip) {
+		super(_lineMap, _scaleFactor, _flip);
 		m_gridMap = _gridMap;
 	}
 

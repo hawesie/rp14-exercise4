@@ -12,6 +12,7 @@ import lejos.robotics.navigation.Pose;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -51,7 +52,7 @@ public class LineMapVisualisation extends JComponent {
 		m_visualisationDimensions = new Rectangle(_width + (2 * X_MARGIN), _height + (2 * Y_MARGIN));
 
 		// set minimum size of frame to scaled size of world
-		setMinimumSize(m_visualisationDimensions.getSize());
+		setMinimumSize(new Dimension(m_visualisationDimensions.width, m_visualisationDimensions.height));
 
 		m_lineMap = _lineMap;
 		m_translatedLines = translateLines(m_lineMap, X_MARGIN, Y_MARGIN);
@@ -65,8 +66,8 @@ public class LineMapVisualisation extends JComponent {
 	 *
 	 * @param _lineMap
 	 */
-	public LineMapVisualisation(LineMap _lineMap) {
-		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, 1);
+	public LineMapVisualisation(LineMap _lineMap, boolean _flip) {
+		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, 1, _flip);
 	}
 
 	/**
@@ -75,8 +76,8 @@ public class LineMapVisualisation extends JComponent {
 	 * @param _lineMap
 	 * @param _scaleFactor
 	 */
-	public LineMapVisualisation(LineMap _lineMap, float _scaleFactor) {
-		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, _scaleFactor);
+	public LineMapVisualisation(LineMap _lineMap, float _scaleFactor, boolean _flip) {
+		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, _scaleFactor, _flip);
 	}
 
 	public LineMap getLineMap() {
@@ -113,9 +114,9 @@ public class LineMapVisualisation extends JComponent {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
-		Rectangle rectFill = new Rectangle(m_worldDimensions);
+		Rectangle rectFill = new Rectangle(m_worldDimensions.x, m_worldDimensions.y, m_worldDimensions.width, m_visualisationDimensions.height);
 
-		rectFill.translate(X_MARGIN, Y_MARGIN);
+		rectFill.setLocation(m_worldDimensions.x + X_MARGIN, m_worldDimensions.y + Y_MARGIN);
 		g2.setPaint(Color.WHITE);
 		g2.fill(rectFill);
 
@@ -222,8 +223,8 @@ public class LineMapVisualisation extends JComponent {
 
 	protected void renderPose(Pose _pose, Graphics2D _g2) {
 		Ellipse2D ell =
-					// first 2 coords are upper left corner of framing rectangle
-					new Ellipse2D.Float(scale(_pose.getX()) - ROBOT_RADIUS + X_MARGIN, scale(_pose.getY()) - ROBOT_RADIUS + Y_MARGIN, ROBOT_RADIUS * 2, ROBOT_RADIUS * 2);
+		// first 2 coords are upper left corner of framing rectangle
+		new Ellipse2D.Float(scale(_pose.getX()) - ROBOT_RADIUS + X_MARGIN, scale(_pose.getY()) - ROBOT_RADIUS + Y_MARGIN, ROBOT_RADIUS * 2, ROBOT_RADIUS * 2);
 		_g2.draw(ell);
 
 		drawLineToHeading(_g2, _pose.getX(), _pose.getY(), _pose.getHeading(), ROBOT_RADIUS / 3);
@@ -235,8 +236,8 @@ public class LineMapVisualisation extends JComponent {
 
 	protected void renderPoint(Point _point, Graphics2D _g2, int _radius) {
 		Ellipse2D ell =
-					// first 2 coords are upper left corner of framing rectangle
-					new Ellipse2D.Double(scale(_point.getX()) - _radius + X_MARGIN, scale(_point.getY()) - _radius + Y_MARGIN, _radius * 2, _radius * 2);
+		// first 2 coords are upper left corner of framing rectangle
+		new Ellipse2D.Double(scale(_point.getX()) - _radius + X_MARGIN, scale(_point.getY()) - _radius + Y_MARGIN, _radius * 2, _radius * 2);
 		_g2.draw(ell);
 	}
 

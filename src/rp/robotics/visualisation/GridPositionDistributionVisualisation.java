@@ -1,12 +1,13 @@
 package rp.robotics.visualisation;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
+import rp.robotics.localisation.GridPositionDistribution;
 
 import lejos.geom.Point;
 import lejos.robotics.mapping.LineMap;
-import rp.robotics.localisation.GridPositionDistribution;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class GridPositionDistributionVisualisation extends LineMapVisualisation {
 
@@ -20,9 +21,8 @@ public class GridPositionDistributionVisualisation extends LineMapVisualisation 
 	protected GridPositionDistribution m_gridDistribution;
 
 	public GridPositionDistributionVisualisation(
-			GridPositionDistribution _distribution, LineMap _lineMap,
-			float _scaleFactor) {
-		super(_lineMap, _scaleFactor);
+			GridPositionDistribution _distribution, LineMap _lineMap, float _scaleFactor, boolean _flip) {
+		super(_lineMap, _scaleFactor, _flip);
 		m_gridDistribution = _distribution;
 	}
 
