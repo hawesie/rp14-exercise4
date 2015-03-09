@@ -264,22 +264,31 @@ public class GridMapTest {
 
 				if (x > 0) {
 					toX = x - 1;
+					toY = y;
 					Assert.assertTrue(map.isValidTransition(x, y, toX, toY));
+					System.out.println(x + " " + y + " " + toX + " " + toY);
 				}
 
 				if (x < width - 1) {
 					toX = x + 1;
+					toY = y;
 					Assert.assertTrue(map.isValidTransition(x, y, toX, toY));
+					System.out.println(x + " " + y + " " + toX + " " + toY);
+
 				}
 
 				if (y > 0) {
+					toX = x;
 					toY = y - 1;
 					Assert.assertTrue(map.isValidTransition(x, y, toX, toY));
+					System.out.println(x + " " + y + " " + toX + " " + toY);
 				}
 
 				if (y < height - 1) {
+					toX = x;
 					toY = y + 1;
 					Assert.assertTrue(map.isValidTransition(x, y, toX, toY));
+					System.out.println(x + " " + y + " " + toX + " " + toY);
 				}
 
 			}
