@@ -10,17 +10,11 @@ import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.Pose;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
-import javax.swing.JComponent;
-import javax.swing.Timer;
+import javax.microedition.lcdui.Graphics;
 
 /**
  * @author nah
@@ -41,10 +35,12 @@ public class LineMapVisualisation extends JComponent {
 	private final float m_scaleFactor;
 	private Line[] m_translatedLines;
 
+	private final boolean m_flip;
 	private ArrayList<PoseProvider> m_poseProviders = new ArrayList<PoseProvider>(1);
 	private ArrayList<LocalisedRangeScanner> m_robots = new ArrayList<LocalisedRangeScanner>(1);
 
-	private LineMapVisualisation(int _width, int _height, LineMap _lineMap, float _scaleFactor) {
+	private LineMapVisualisation(int _width, int _height, LineMap _lineMap, float _scaleFactor, boolean _flip) {
+		m_flip = _flip;
 		m_scaleFactor = _scaleFactor;
 		m_worldDimensions = new Rectangle(scale(_width), scale(_height));
 		m_visualisationDimensions = new Rectangle(_width + (2 * X_MARGIN), _height + (2 * Y_MARGIN));
@@ -117,6 +113,13 @@ public class LineMapVisualisation extends JComponent {
 		rectFill.translate(X_MARGIN, Y_MARGIN);
 		g2.setPaint(Color.WHITE);
 		g2.fill(rectFill);
+
+		if (m_flip) {
+			int height = getHeight() / 2;
+			g2.translate(0, height);
+			g2.scale(1, -1);
+			g2.translate(0, -height);
+		}
 
 		renderMap(g2);
 	}
