@@ -2,12 +2,10 @@ package rp.robotics.mapping;
 
 /**
  * Enumeration for discrete headings that the robot might want to represent.
- * 
+ *
  * @author nah
- * 
  */
 public enum Heading {
-
 	// Heading along the positive x axis
 	PLUS_X,
 	// Heading along the positive y axis
@@ -19,24 +17,23 @@ public enum Heading {
 
 	/**
 	 * Gets the degree orientation for a given enum value.
-	 * 
+	 *
 	 * @param _heading
 	 * @return
 	 */
 	public static float toDegrees(Heading _heading) {
 		float heading = 0;
 
-		if (_heading == Heading.PLUS_X) {
+		if (_heading == Heading.PLUS_X)
 			heading = 0;
-		} else if (_heading == Heading.PLUS_Y) {
+		else if (_heading == Heading.PLUS_Y)
 			heading = 90;
-		} else if (_heading == Heading.MINUS_X) {
+		else if (_heading == Heading.MINUS_X)
 			heading = 180;
-		} else if (_heading == Heading.MINUS_Y) {
+		else if (_heading == Heading.MINUS_Y)
 			heading = -90;
-		} else {
+		else
 			assert false : "Unknown value for enumeration";
-		}
 		return heading;
 
 	}
