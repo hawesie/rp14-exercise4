@@ -10,11 +10,17 @@ import lejos.robotics.localization.PoseProvider;
 import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.Pose;
 
+import javax.swing.JComponent;
+import javax.swing.Timer;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
-
-import javax.microedition.lcdui.Graphics;
 
 /**
  * @author nah
@@ -46,7 +52,7 @@ public class LineMapVisualisation extends JComponent {
 		m_visualisationDimensions = new Rectangle(_width + (2 * X_MARGIN), _height + (2 * Y_MARGIN));
 
 		// set minimum size of frame to scaled size of world
-		setMinimumSize(m_visualisationDimensions.getSize());
+		setMinimumSize(new Dimension(m_visualisationDimensions.width, m_visualisationDimensions.height));
 
 		m_lineMap = _lineMap;
 		m_translatedLines = translateLines(m_lineMap, X_MARGIN, Y_MARGIN);
@@ -60,8 +66,8 @@ public class LineMapVisualisation extends JComponent {
 	 *
 	 * @param _lineMap
 	 */
-	public LineMapVisualisation(LineMap _lineMap) {
-		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, 1);
+	public LineMapVisualisation(LineMap _lineMap, boolean _flip) {
+		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, 1, _flip);
 	}
 
 	/**
@@ -70,8 +76,8 @@ public class LineMapVisualisation extends JComponent {
 	 * @param _lineMap
 	 * @param _scaleFactor
 	 */
-	public LineMapVisualisation(LineMap _lineMap, float _scaleFactor) {
-		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, _scaleFactor);
+	public LineMapVisualisation(LineMap _lineMap, float _scaleFactor, boolean _flip) {
+		this((int) _lineMap.getBoundingRect().getWidth(), (int) _lineMap.getBoundingRect().getHeight(), _lineMap, _scaleFactor, _flip);
 	}
 
 	public LineMap getLineMap() {
@@ -108,9 +114,9 @@ public class LineMapVisualisation extends JComponent {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
-		Rectangle rectFill = new Rectangle(m_worldDimensions);
+		Rectangle rectFill = new Rectangle(m_worldDimensions.x, m_worldDimensions.y, m_worldDimensions.width, m_visualisationDimensions.height);
 
-		rectFill.translate(X_MARGIN, Y_MARGIN);
+		rectFill.setLocation(m_worldDimensions.x + X_MARGIN, m_worldDimensions.y + Y_MARGIN);
 		g2.setPaint(Color.WHITE);
 		g2.fill(rectFill);
 

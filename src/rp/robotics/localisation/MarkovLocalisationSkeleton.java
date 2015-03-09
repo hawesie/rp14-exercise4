@@ -1,11 +1,5 @@
 package rp.robotics.localisation;
 
-import javax.swing.JFrame;
-
-import lejos.geom.Point;
-import lejos.robotics.mapping.LineMap;
-import lejos.robotics.navigation.Pose;
-import lejos.util.Delay;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.IGridMap;
 import rp.robotics.mapping.MapUtils;
@@ -14,6 +8,13 @@ import rp.robotics.simulation.SimulatedRobot;
 import rp.robotics.visualisation.GridMapViewer;
 import rp.robotics.visualisation.GridPositionDistributionVisualisation;
 import rp.robotics.visualisation.KillMeNow;
+
+import lejos.geom.Point;
+import lejos.robotics.mapping.LineMap;
+import lejos.robotics.navigation.Pose;
+import lejos.util.Delay;
+
+import javax.swing.JFrame;
 
 public class MarkovLocalisationSkeleton {
 
@@ -32,8 +33,7 @@ public class MarkovLocalisationSkeleton {
 	private GridPositionDistributionVisualisation m_mapVis;
 	private final float m_translationAmount;
 
-	public MarkovLocalisationSkeleton(SimulatedRobot _robot, LineMap _lineMap,
-			IGridMap _gridMap, float _translationAmount) {
+	public MarkovLocalisationSkeleton(SimulatedRobot _robot, LineMap _lineMap, IGridMap _gridMap, float _translationAmount) {
 
 		m_robot = _robot;
 		m_lineMap = _lineMap;
@@ -52,8 +52,7 @@ public class MarkovLocalisationSkeleton {
 		frame.addWindowListener(new KillMeNow());
 
 		// visualise the distribution on top of a line map
-		m_mapVis = new GridPositionDistributionVisualisation(m_distribution,
-				m_lineMap, 2);
+		m_mapVis = new GridPositionDistributionVisualisation(m_distribution, m_lineMap, 2, true);
 
 		// Visualise the robot
 		m_mapVis.addRobot(m_robot);

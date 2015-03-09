@@ -1,9 +1,9 @@
 package rp.robotics.visualisation;
 
-import javax.swing.JFrame;
-
 import rp.robotics.mapping.MapUtils;
 import rp.robotics.mapping.RPLineMap;
+
+import javax.swing.JFrame;
 
 public class LineMapViewer {
 
@@ -16,7 +16,7 @@ public class LineMapViewer {
 		RPLineMap lineMap = MapUtils.create2014Map2();
 
 		// Create the visualisation of this map with 2 pixels as 1 cm
-		LineMapVisualisation mapVis = new LineMapVisualisation(lineMap, 2);
+		LineMapVisualisation mapVis = new LineMapVisualisation(lineMap, 2, true);
 
 		// Add visualisation to frame
 		frame.add(mapVis);

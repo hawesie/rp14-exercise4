@@ -1,9 +1,9 @@
 package rp.robotics.visualisation;
 
+import rp.Exercise.Ex4.mapping.GridMap;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.IGridMap;
 import rp.robotics.mapping.MapUtils;
-import rp.robotics.mapping.NicksGridMap;
 import rp.robotics.mapping.RPLineMap;
 
 import javax.swing.JFrame;
@@ -22,7 +22,7 @@ public class GridMapViewer {
 	 * @return
 	 */
 	public static IGridMap createGridMap(RPLineMap _lineMap, int _gridXSize, int _gridYSize, float _xStart, float _yStart, float _cellSize) {
-		return new NicksGridMap(_gridXSize, _gridYSize, _xStart, _yStart, _cellSize, _lineMap);
+		return new GridMap(_gridXSize, _gridYSize, _xStart, _yStart, _cellSize, _lineMap);
 	}
 
 	public void run() {
@@ -49,11 +49,11 @@ public class GridMapViewer {
 		System.out.println("distance MINUS_X (left): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.toDegrees(Heading.MINUS_X)));
 
 		// view the map with 2 pixels as 1 cm
-		GridMapVisualisation mapVis = new GridMapVisualisation(gridMap, lineMap, 2);
+		GridMapVisualisation mapVis = new GridMapVisualisation(gridMap, lineMap, 2, true);
 
 		frame.add(mapVis);
-		frame.pack();
-		frame.setSize(800, 600);
+		frame.setSize(700, 600);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
