@@ -1,15 +1,14 @@
 package rp.robotics.visualisation;
 
-import lejos.robotics.navigation.Pose;
 import rp.robotics.control.RandomGridWalk;
 import rp.robotics.simulation.SimulatedRobot;
 
+import lejos.robotics.navigation.Pose;
+
 /**
- * Demonstrates the use, and visualisation, of a simulated simple robot on a
- * line map;
- * 
- * @author Nick Hawes
+ * Demonstrates the use, and visualisation, of a simulated simple robot on a line map;
  *
+ * @author Nick Hawes
  */
 public class SimulationViewer {
 
@@ -29,8 +28,7 @@ public class SimulationViewer {
 		int yInset = 31;
 
 		// Create a simulated robot with a single, forward-pointing sensor
-		SimulatedRobot robot = SimulatedRobot.createSingleSensorRobot(
-				new Pose(xInset, yInset, 0), mapViz.getLineMap());
+		SimulatedRobot robot = SimulatedRobot.createSingleSensorRobot(new Pose(xInset, yInset, 0), mapViz.getLineMap());
 
 		// Add it to the visualisation
 		mapViz.addRobot(robot);

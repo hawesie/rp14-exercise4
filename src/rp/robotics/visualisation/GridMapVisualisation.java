@@ -1,6 +1,7 @@
 package rp.robotics.visualisation;
 
 import rp.robotics.mapping.IGridMap;
+import search.Coordinate;
 import search.Node;
 
 import lejos.geom.Point;
@@ -24,7 +25,7 @@ public class GridMapVisualisation extends LineMapVisualisation {
 	private static final long serialVersionUID = 1L;
 
 	protected IGridMap m_gridMap;
-	protected List<Node<Point>> path;
+	protected List<Node<Coordinate>> path;
 
 	public GridMapVisualisation(IGridMap _gridMap, LineMap _lineMap, float _scaleFactor, boolean _flip) {
 		super(_lineMap, _scaleFactor, _flip);
@@ -70,17 +71,17 @@ public class GridMapVisualisation extends LineMapVisualisation {
 
 	}
 
-	public void setPath(List<Node<Point>> path) {
+	public void setPath(List<Node<Coordinate>> path) {
 		this.path = path;
 	}
 	public void drawPath(Graphics2D g2) {
 		g2.setStroke(new BasicStroke(3));
 		g2.setColor(Color.RED);
 		Point a, b;
-		a = m_gridMap.getCoordinatesOfGridPosition((int) path.get(0).contents.x, (int) path.get(0).contents.y);
+		a = m_gridMap.getCoordinatesOfGridPosition(path.get(0).payload.x, path.get(0).payload.y);
 		for (int i = 1; i < path.size(); i++) {
-			Point bp = path.get(i).contents;
-			b = m_gridMap.getCoordinatesOfGridPosition((int) bp.x, (int) bp.y);
+			Coordinate bp = path.get(i).payload;
+			b = m_gridMap.getCoordinatesOfGridPosition(bp.x, bp.y);
 			renderLine(a, b, g2);
 			a = b;
 		}

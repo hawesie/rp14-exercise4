@@ -269,7 +269,7 @@ public class GridMapTest {
 
 		// copied from above method
 		float height = 238;
-		float width = 366;
+		// float width = 366;
 
 		// position of 0,0 junction wrt to top left of map
 		int xInset = 24;

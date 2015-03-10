@@ -231,8 +231,8 @@ public class LineMapVisualisation extends JComponent {
 
 	protected void renderPose(Pose _pose, Graphics2D _g2) {
 		Ellipse2D ell =
-					// first 2 coords are upper left corner of framing rectangle
-					new Ellipse2D.Float(scale(_pose.getX()) - ROBOT_RADIUS + X_MARGIN, scale(_pose.getY()) - ROBOT_RADIUS + Y_MARGIN, ROBOT_RADIUS * 2, ROBOT_RADIUS * 2);
+		// first 2 coords are upper left corner of framing rectangle
+		new Ellipse2D.Float(scale(_pose.getX()) - ROBOT_RADIUS + X_MARGIN, scale(_pose.getY()) - ROBOT_RADIUS + Y_MARGIN, ROBOT_RADIUS * 2, ROBOT_RADIUS * 2);
 		_g2.draw(ell);
 
 		drawLineToHeading(_g2, _pose.getX(), _pose.getY(), _pose.getHeading(), ROBOT_RADIUS / 3);
@@ -244,8 +244,8 @@ public class LineMapVisualisation extends JComponent {
 
 	protected void renderPoint(Point _point, Graphics2D _g2, int _radius) {
 		Ellipse2D ell =
-					// first 2 coords are upper left corner of framing rectangle
-					new Ellipse2D.Double(scale(_point.getX()) - _radius + X_MARGIN, scale(_point.getY()) - _radius + Y_MARGIN, _radius * 2, _radius * 2);
+		// first 2 coords are upper left corner of framing rectangle
+		new Ellipse2D.Double(scale(_point.getX()) - _radius + X_MARGIN, scale(_point.getY()) - _radius + Y_MARGIN, _radius * 2, _radius * 2);
 		_g2.draw(ell);
 	}
 

@@ -1,14 +1,13 @@
 package rp.robotics.mapping;
 
-import java.util.ArrayList;
-
 import lejos.geom.Line;
 import lejos.geom.Rectangle;
 import lejos.robotics.navigation.Move;
 import lejos.robotics.navigation.Pose;
 
+import java.util.ArrayList;
+
 /**
- * 
  * @author Nick Hawes
  */
 public class MapUtils {
@@ -16,9 +15,8 @@ public class MapUtils {
 	private static final float BOARD_WIDTH = 1.7f;
 
 	/**
-	 * Create a rectangular map with 0,0 at the top left and the given width and
-	 * height
-	 * 
+	 * Create a rectangular map with 0,0 at the top left and the given width and height
+	 *
 	 * @param _width
 	 * @param _height
 	 * @return
@@ -26,25 +24,19 @@ public class MapUtils {
 	public static RPLineMap createRectangularMap(float _width, float _height) {
 
 		// these are the walls for the world outline
-		Line[] lines = new Line[] { new Line(0f, 0f, _width, 0f),
-				new Line(_width, 0f, _width, _height),
-				new Line(_width, _height, 0f, _height),
-				new Line(0f, _height, 0f, 0f) };
+		Line[] lines = new Line[] { new Line(0f, 0f, _width, 0f), new Line(_width, 0f, _width, _height), new Line(_width, _height, 0f, _height), new Line(0f, _height, 0f, 0f) };
 
-		RPLineMap map = new RPLineMap(lines, new Rectangle(0, 0, _width,
-				_height));
+		RPLineMap map = new RPLineMap(lines, new Rectangle(0, 0, _width, _height));
 
 		return map;
 	}
 
 	/**
-	 * Turns a straight line into a box with 4 walls around the line at the
-	 * given width
-	 * 
+	 * Turns a straight line into a box with 4 walls around the line at the given width
+	 *
 	 * @return
 	 */
-	public static ArrayList<Line> lineToBox(float _x1, float _y1, float _x2,
-			float _y2) {
+	public static ArrayList<Line> lineToBox(float _x1, float _y1, float _x2, float _y2) {
 
 		ArrayList<Line> box = new ArrayList<Line>(4);
 
@@ -56,23 +48,23 @@ public class MapUtils {
 			box.add(new Line(_x1 + expand, _y1, _x2 + expand, _y2));
 			box.add(new Line(_x2 + expand, _y2, _x2 - expand, _y2));
 			box.add(new Line(_x2 - expand, _y2, _x1 - expand, _y1));
-		} else if (_y1 == _y2) {
+		}
+		else if (_y1 == _y2) {
 			box.add(new Line(_x1, _y1 + expand, _x2, _y2 + expand));
 			box.add(new Line(_x2, _y2 - expand, _x2, _y2 + expand));
 			box.add(new Line(_x1, _y1 - expand, _x2, _y2 - expand));
 			box.add(new Line(_x1, _y1 - expand, _x1, _y1 + expand));
 
-		} else {
-			throw new RuntimeException(
-					"can only use this with axis-aligned lines");
 		}
+		else
+			throw new RuntimeException("can only use this with axis-aligned lines");
 
 		return box;
 	}
 
 	/**
 	 * Creates a grid map to match the training map as of 6/3/2013.
-	 * 
+	 *
 	 * @return
 	 */
 	public static RPLineMap createTrainingMap() {
@@ -317,7 +309,7 @@ public class MapUtils {
 
 	/**
 	 * To string representation for a pose.
-	 * 
+	 *
 	 * @param _pose
 	 * @return
 	 */
@@ -333,25 +325,23 @@ public class MapUtils {
 
 	/**
 	 * Calculate the change in X coordinate to pose from move.
-	 * 
+	 *
 	 * @param _previousPose
 	 * @param _move
 	 * @return
 	 */
 	public static float changeInX(Pose _previousPose, Move _move) {
-		return (_move.getDistanceTraveled() * ((float) Math.cos(Math
-				.toRadians(_previousPose.getHeading()))));
+		return (_move.getDistanceTraveled() * ((float) Math.cos(Math.toRadians(_previousPose.getHeading()))));
 	}
 
 	/**
 	 * Calculate the change in Y coordinate to pose from move.
-	 * 
+	 *
 	 * @param _previousPose
 	 * @param _move
 	 * @return
 	 */
 	public static float changeInY(Pose _previousPose, Move _move) {
-		return (_move.getDistanceTraveled() * ((float) Math.sin(Math
-				.toRadians(_previousPose.getHeading()))));
+		return (_move.getDistanceTraveled() * ((float) Math.sin(Math.toRadians(_previousPose.getHeading()))));
 	}
 }
