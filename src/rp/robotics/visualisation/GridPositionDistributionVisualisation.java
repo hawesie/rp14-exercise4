@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 public class GridPositionDistributionVisualisation extends LineMapVisualisation {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -20,15 +20,14 @@ public class GridPositionDistributionVisualisation extends LineMapVisualisation 
 
 	protected GridPositionDistribution m_gridDistribution;
 
-	public GridPositionDistributionVisualisation(
-			GridPositionDistribution _distribution, LineMap _lineMap, float _scaleFactor, boolean _flip) {
+	public GridPositionDistributionVisualisation(GridPositionDistribution _distribution, LineMap _lineMap, float _scaleFactor, boolean _flip) {
 		super(_lineMap, _scaleFactor, _flip);
 		m_gridDistribution = _distribution;
 	}
 
 	/**
 	 * Set distribution to be visualised. Does not update linemap part.
-	 * 
+	 *
 	 * @param _gridDistribution
 	 */
 	public void setDistribution(GridPositionDistribution _gridDistribution) {
@@ -44,23 +43,18 @@ public class GridPositionDistributionVisualisation extends LineMapVisualisation 
 		_g2.setPaint(Color.BLUE);
 
 		// then add grid
-		for (int x = 0; x < m_gridDistribution.getGridWidth(); x++) {
-			for (int y = 0; y < m_gridDistribution.getGridHeight(); y++) {
+		for (int x = 0; x < m_gridDistribution.getGridWidth(); x++)
+			for (int y = 0; y < m_gridDistribution.getGridHeight(); y++)
 				if (!m_gridDistribution.isObstructed(x, y)) {
-					Point gridPoint = m_gridDistribution.getGridMap()
-							.getCoordinatesOfGridPosition(x, y);
+					Point gridPoint = m_gridDistribution.getGridMap().getCoordinatesOfGridPosition(x, y);
 
-					float radius = BIGGEST_POINT_RADIUS
-							* m_gridDistribution.getProbability(x, y);
+					float radius = BIGGEST_POINT_RADIUS * m_gridDistribution.getProbability(x, y);
 					if (radius > 0) {
-						if (radius < 1) {
+						if (radius < 1)
 							radius = 1;
-						}
 						renderPoint(gridPoint, _g2, (int) radius);
 					}
 				}
-			}
-		}
 
 	}
 }
