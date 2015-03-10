@@ -2,7 +2,6 @@ package rp.robotics.mapping;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import rp.Exercise.Ex4.mapping.GridMap;
 
 import lejos.geom.Line;
 import lejos.geom.Rectangle;
@@ -26,7 +25,7 @@ public class GridMapTest {
 	 * @return
 	 */
 	public static IGridMap createGridMap(RPLineMap _lineMap, int _gridXSize, int _gridYSize, float _xStart, float _yStart, float _cellSize) {
-		return new GridMap(_gridXSize, _gridYSize, _xStart, _yStart, _cellSize, _lineMap);
+		return new NicksGridMap(_gridXSize, _gridYSize, _xStart, _yStart, _cellSize, _lineMap);
 	}
 
 	public static IGridMap createRectangularGridMap(int _xJunctions, int _yJunctions, float _pointSeparation) {
