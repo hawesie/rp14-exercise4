@@ -36,8 +36,8 @@ public class GridMapViewer {
 		float junctionSeparation = 30;
 
 		// position of grid map 0,0
-		int xInset = 15;
-		int yInset = 15;
+		int xInset = 14;
+		int yInset = 31;
 
 		IGridMap gridMap = createGridMap(lineMap, xJunctions, yJunctions, xInset, yInset, junctionSeparation);
 

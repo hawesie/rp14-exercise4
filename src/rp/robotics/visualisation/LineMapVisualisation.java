@@ -42,13 +42,15 @@ public class LineMapVisualisation extends JComponent {
 	private final Rectangle m_visualisationDimensions;
 	private final LineMap m_lineMap;
 	private final float m_scaleFactor;
-	private final boolean m_flip;
+
 	private Line[] m_translatedLines;
+	private final boolean m_flip;
 
 	private ArrayList<PoseProvider> m_poseProviders = new ArrayList<PoseProvider>(1);
 	private ArrayList<LocalisedRangeScanner> m_robots = new ArrayList<LocalisedRangeScanner>(1);
 
-	private LineMapVisualisation(int _width, int _height, LineMap _lineMap, float _scaleFactor) {
+	private LineMapVisualisation(int _width, int _height, LineMap _lineMap, float _scaleFactor, boolean _flip) {
+		m_flip = _flip;
 		m_scaleFactor = _scaleFactor;
 		m_worldDimensions = new Rectangle(scale(_width), scale(_height));
 		m_visualisationDimensions = new Rectangle(_width + (2 * X_MARGIN), _height + (2 * Y_MARGIN));
@@ -230,8 +232,8 @@ public class LineMapVisualisation extends JComponent {
 
 	protected void renderPose(Pose _pose, Graphics2D _g2) {
 		Ellipse2D ell =
-		// first 2 coords are upper left corner of framing rectangle
-		new Ellipse2D.Float(scale(_pose.getX()) - ROBOT_RADIUS + X_MARGIN, scale(_pose.getY()) - ROBOT_RADIUS + Y_MARGIN, ROBOT_RADIUS * 2, ROBOT_RADIUS * 2);
+					// first 2 coords are upper left corner of framing rectangle
+					new Ellipse2D.Float(scale(_pose.getX()) - ROBOT_RADIUS + X_MARGIN, scale(_pose.getY()) - ROBOT_RADIUS + Y_MARGIN, ROBOT_RADIUS * 2, ROBOT_RADIUS * 2);
 		_g2.draw(ell);
 
 		drawLineToHeading(_g2, _pose.getX(), _pose.getY(), _pose.getHeading(), ROBOT_RADIUS / 3);
@@ -243,8 +245,8 @@ public class LineMapVisualisation extends JComponent {
 
 	protected void renderPoint(Point _point, Graphics2D _g2, int _radius) {
 		Ellipse2D ell =
-		// first 2 coords are upper left corner of framing rectangle
-		new Ellipse2D.Double(scale(_point.getX()) - _radius + X_MARGIN, scale(_point.getY()) - _radius + Y_MARGIN, _radius * 2, _radius * 2);
+					// first 2 coords are upper left corner of framing rectangle
+					new Ellipse2D.Double(scale(_point.getX()) - _radius + X_MARGIN, scale(_point.getY()) - _radius + Y_MARGIN, _radius * 2, _radius * 2);
 		_g2.draw(ell);
 	}
 
