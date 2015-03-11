@@ -307,59 +307,38 @@ public class MapUtils {
 		return new RPLineMap(lineArray, new Rectangle(0, 0, width, height));
 	}
 
-	
 	public static RPLineMap create2015Map1() {
 
 		float height = 244f;
 		float width = 368f;
-		
+
 		final boolean createBoxLinesAsBoxes = false;
 
 		ArrayList<Line> lines = new ArrayList<Line>();
 
 		// Rectangular outer wall edges
 		lines.addAll(createBox(0, 0, width, height, false));
-		
 
 		// Top left box
-		lines.addAll(createBox(0, 30, 
-							   32, 30+30,
-							   createBoxLinesAsBoxes));
+		lines.addAll(createBox(0, 30, 32, 30 + 30, createBoxLinesAsBoxes));
 		// Bottom left box
-		lines.addAll(createBox(0, height-65, 
-							   30, height-31,
-							   createBoxLinesAsBoxes));
+		lines.addAll(createBox(0, height - 65, 30, height - 31, createBoxLinesAsBoxes));
 		// Top right box
-		lines.addAll(createBox(width-32, 30, 
-							   width, 30+30,
-							   createBoxLinesAsBoxes));
+		lines.addAll(createBox(width - 32, 30, width, 30 + 30, createBoxLinesAsBoxes));
 		// Bottom right box
-		lines.addAll(createBox(width-32, height-61, 
-							   width, height-31,
-							   createBoxLinesAsBoxes));
-		
-		
-		// Top-edge box
-		lines.addAll(createBox(122, 0, 
-							   122+90, 31,
-							   createBoxLinesAsBoxes));
-		// Bottom-edge box
-		lines.addAll(createBox(121, height-31, 
-							   121+90, height,
-							   createBoxLinesAsBoxes));
-		
-		
-		// Mid-left box
-		lines.addAll(createBox(119, 90, 
-							   119+32, 90+62,
-							   createBoxLinesAsBoxes));
-		// Mid-right box
-		lines.addAll(createBox(119+32+62, 90, 
-							   119+32+62+32, 90+62,
-							   createBoxLinesAsBoxes));
+		lines.addAll(createBox(width - 32, height - 61, width, height - 31, createBoxLinesAsBoxes));
 
-		lines.add(new Line(119+32, 90+62, 119+32+62, 90+62));
-		
+		// Top-edge box
+		lines.addAll(createBox(122, 0, 122 + 90, 31, createBoxLinesAsBoxes));
+		// Bottom-edge box
+		lines.addAll(createBox(121, height - 31, 121 + 90, height, createBoxLinesAsBoxes));
+
+		// Mid-left box
+		lines.addAll(createBox(119, 90, 119 + 32, 90 + 62, createBoxLinesAsBoxes));
+		// Mid-right box
+		lines.addAll(createBox(119 + 32 + 62, 90, 119 + 32 + 62 + 32, 90 + 62, createBoxLinesAsBoxes));
+
+		lines.add(new Line(119 + 32, 90 + 62, 119 + 32 + 62, 90 + 62));
 
 		Line[] lineArray = new Line[lines.size()];
 
@@ -370,31 +349,29 @@ public class MapUtils {
 
 	/**
 	 * Create a box of lines.
+	 * 
 	 * @param left The x-coordinate of the left side.
 	 * @param top The y-coordinate of the top side.
 	 * @param right The x-coordinate of the right side.
 	 * @param bottom The y-coordinate of the bottom side.
 	 * @return An arraylist of lines that make up that box.
 	 */
-	private static ArrayList<Line> createBox(float left, float top, float right, float bottom, boolean asLineBoxes)
-	{
+	private static ArrayList<Line> createBox(float left, float top, float right, float bottom, boolean asLineBoxes) {
 		ArrayList<Line> boxLines = new ArrayList<Line>();
 
-		if (asLineBoxes)
-		{
+		if (asLineBoxes) {
 			boxLines.addAll(lineToBox(left, top, left, bottom)); // Left
 			boxLines.addAll(lineToBox(left, top, right, top)); // Top
 			boxLines.addAll(lineToBox(right, top, right, bottom)); // Right
 			boxLines.addAll(lineToBox(left, bottom, right, bottom)); // Bottom
 		}
-		else
-		{
+		else {
 			boxLines.add(new Line(left, top, left, bottom)); // Left
 			boxLines.add(new Line(left, top, right, top)); // Top
 			boxLines.add(new Line(right, top, right, bottom)); // Right
 			boxLines.add(new Line(left, bottom, right, bottom)); // Bottom
 		}
-		
+
 		return boxLines;
 	}
 	/**

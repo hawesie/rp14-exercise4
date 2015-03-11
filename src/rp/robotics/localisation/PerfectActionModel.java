@@ -14,21 +14,18 @@ public class PerfectActionModel implements ActionModel {
 	public GridPositionDistribution updateAfterMove(GridPositionDistribution _from, Heading _heading) {
 
 		// Create the new distribution that will result from applying the action model
-		
+
 		GridPositionDistribution to = new GridPositionDistribution(_from);
 
 		// Move the probability in the correct direction for the action
 		if (_heading == Heading.PLUS_X)
 			movePlusX(_from, to);
-		else if (_heading == Heading.PLUS_Y) {
+		else if (_heading == Heading.PLUS_Y)
 			movePlusY(_from, to);
-		}
-		else if (_heading == Heading.MINUS_X) {
+		else if (_heading == Heading.MINUS_X)
 			moveMinusX(_from, to);
-		}
-		else if (_heading == Heading.MINUS_Y) {
+		else if (_heading == Heading.MINUS_Y)
 			moveMinusY(_from, to);
-		}
 
 		return to;
 	}
@@ -97,7 +94,7 @@ public class PerfectActionModel implements ActionModel {
 
 				}
 	}
-	
+
 	private void moveMinusX(GridPositionDistribution _from, GridPositionDistribution _to) {
 
 		// iterate through points updating as appropriate
@@ -121,29 +118,30 @@ public class PerfectActionModel implements ActionModel {
 					_to.setProbability(toX, toY, fromProb);
 
 				}
-		private void moveMinusY(GridPositionDistribution _from, GridPositionDistribution _to) {
-
-			// iterate through points updating as appropriate
-			for (int y = 0; y < _to.getGridHeight(); y++)
-				for (int x = 0; x < _to.getGridWidth(); x++)
-					// make sure to respect obstructed grid points
-					if (!_to.isObstructed(x, y)) {
-						
-						// The below code does now translate the value
-
-						// position before move
-						int fromX = x;
-						int fromY = y + 1;
-						float fromProb = _from.getProbability(fromX, fromY);
-
-						// position after move
-						int toX = x;
-						int toY = y;
-
-						// set probability for position after move
-						_to.setProbability(toX, toY, fromProb);
-
-					}
-		}
 	}
+	private void moveMinusY(GridPositionDistribution _from, GridPositionDistribution _to) {
+
+		// iterate through points updating as appropriate
+		for (int y = 0; y < _to.getGridHeight(); y++)
+			for (int x = 0; x < _to.getGridWidth(); x++)
+				// make sure to respect obstructed grid points
+				if (!_to.isObstructed(x, y)) {
+
+					// The below code does now translate the value
+
+					// position before move
+					int fromX = x;
+					int fromY = y + 1;
+					float fromProb = _from.getProbability(fromX, fromY);
+
+					// position after move
+					int toX = x;
+					int toY = y;
+
+					// set probability for position after move
+					_to.setProbability(toX, toY, fromProb);
+
+				}
+	}
+}
 }
