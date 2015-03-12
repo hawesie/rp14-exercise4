@@ -18,13 +18,13 @@ public class PerfectActionModel implements ActionModel {
 		GridPositionDistribution to = new GridPositionDistribution(_from);
 
 		// Move the probability in the correct direction for the action
-		if (_heading == Heading.PLUS_X)
+		if (_heading == Heading.RIGHT)
 			movePlusX(_from, to);
-		else if (_heading == Heading.PLUS_Y)
+		else if (_heading == Heading.UP)
 			movePlusY(_from, to);
-		else if (_heading == Heading.MINUS_X)
+		else if (_heading == Heading.LEFT)
 			moveMinusX(_from, to);
-		else if (_heading == Heading.MINUS_Y)
+		else if (_heading == Heading.DOWN)
 			moveMinusY(_from, to);
 
 		return to;
@@ -143,5 +143,4 @@ public class PerfectActionModel implements ActionModel {
 
 				}
 	}
-}
 }
