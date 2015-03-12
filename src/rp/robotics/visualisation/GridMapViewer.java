@@ -43,10 +43,10 @@ public class GridMapViewer {
 
 		int x = 1, y = 1;
 
-		System.out.println("distance PLUS_Y (down): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.toDegrees(Heading.PLUS_Y)));
-		System.out.println("distance PLUS_X (right): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.toDegrees(Heading.PLUS_X)));
-		System.out.println("distance MINUS_Y (up): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.toDegrees(Heading.MINUS_Y)));
-		System.out.println("distance MINUS_X (left): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.toDegrees(Heading.MINUS_X)));
+		System.out.println("distance PLUS_Y (down): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.UP.toDegrees()));
+		System.out.println("distance PLUS_X (right): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.RIGHT.toDegrees()));
+		System.out.println("distance MINUS_Y (up): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.DOWN.toDegrees()));
+		System.out.println("distance MINUS_X (left): " + gridMap.rangeToObstacleFromGridPosition(x, y, Heading.LEFT.toDegrees()));
 
 		// view the map with 2 pixels as 1 cm
 		GridMapVisualisation mapVis = new GridMapVisualisation(gridMap, lineMap, 2, true);

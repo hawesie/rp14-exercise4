@@ -107,25 +107,25 @@ public class MarkovLocalisationSkeleton {
 
 		while (true) {
 
-			movementHeading = Heading.PLUS_X;
+			movementHeading = Heading.RIGHT;
 			moves = horizontal;
 			for (int i = 0; i < moves; i++)
 				move(m_translationAmount, movementHeading, actionModel, sensorModel);
 
 			m_robot.rotate(90);
-			movementHeading = Heading.PLUS_Y;
+			movementHeading = Heading.UP;
 			moves = vertical;
 			for (int i = 0; i < moves; i++)
 				move(m_translationAmount, movementHeading, actionModel, sensorModel);
 
 			m_robot.rotate(90);
-			movementHeading = Heading.MINUS_X;
+			movementHeading = Heading.LEFT;
 			moves = horizontal;
 			for (int i = 0; i < moves; i++)
 				move(m_translationAmount, movementHeading, actionModel, sensorModel);
 
 			m_robot.rotate(90);
-			movementHeading = Heading.MINUS_Y;
+			movementHeading = Heading.DOWN;
 			moves = vertical;
 			for (int i = 0; i < moves; i++)
 				move(m_translationAmount, movementHeading, actionModel, sensorModel);
@@ -167,7 +167,7 @@ public class MarkovLocalisationSkeleton {
 		Point startPoint = gridMap.getCoordinatesOfGridPosition(startGridX, startGridY);
 
 		// starting heading
-		float startTheta = Heading.toDegrees(Heading.PLUS_X);
+		float startTheta = Heading.RIGHT.toDegrees();
 
 		Pose startPose = new Pose(startPoint.x, startPoint.y, startTheta);
 

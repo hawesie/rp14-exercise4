@@ -15,6 +15,20 @@ public enum Heading {
 		return getCompass(getHeading(x, y).val - heading.val);
 	}
 
+	public Coordinate toCoordinate() {
+		switch (val) {
+			case 0:
+				return new Coordinate(0, 1);
+			case 1:
+				return new Coordinate(1, 0);
+			case 2:
+				return new Coordinate(0, -1);
+			case 3:
+				return new Coordinate(-1, 0);
+			default:
+				throw new IllegalArgumentException("Whut just happened?!"); // Should never get to here
+		}
+	}
 	@SuppressWarnings("incomplete-switch")
 	public static Heading getHeading(int x, int y) {
 		if (x != 0)

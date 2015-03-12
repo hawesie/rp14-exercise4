@@ -260,10 +260,10 @@ public class GridMapTest {
 		float sep = 30f;
 		float target = sep / 2f;
 		IGridMap map = createRectangularGridMap(1, 1, sep);
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.PLUS_X)), target, 0f);
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.PLUS_Y)), target, 0f);
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.MINUS_X)), target, 0f);
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.MINUS_Y)), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.RIGHT.toDegrees()), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.UP.toDegrees()), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.LEFT.toDegrees()), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.DOWN.toDegrees()), target, 0f);
 
 		map = createTestMap();
 
@@ -275,9 +275,9 @@ public class GridMapTest {
 		int xInset = 24;
 		int yInset = 24;
 
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.PLUS_X)), 233f, 0f);
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.PLUS_Y)), height - yInset, 0f);
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.MINUS_X)), xInset, 0f);
-		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.toDegrees(Heading.MINUS_Y)), yInset, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.RIGHT.toDegrees()), 233f, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.UP.toDegrees()), height - yInset, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.LEFT.toDegrees()), xInset, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.DOWN.toDegrees()), yInset, 0f);
 	}
 }
