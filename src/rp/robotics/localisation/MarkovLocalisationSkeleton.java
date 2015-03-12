@@ -3,9 +3,8 @@ package rp.robotics.localisation;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.IGridMap;
 import rp.robotics.mapping.MapUtils;
-import rp.robotics.mapping.RPLineMap;
+import rp.robotics.mapping.NicksGridMap;
 import rp.robotics.simulation.SimulatedRobot;
-import rp.robotics.visualisation.GridMapViewer;
 import rp.robotics.visualisation.GridPositionDistributionVisualisation;
 import rp.robotics.visualisation.KillMeNow;
 
@@ -140,22 +139,8 @@ public class MarkovLocalisationSkeleton {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		// Work on this map
-		RPLineMap lineMap = MapUtils.create2014Map2();
-
-		// Grid map configuration
-
-		// Grid junction numbers
-		int xJunctions = 10;
-		int yJunctions = 7;
-
-		float junctionSeparation = 30;
-
-		int xInset = 14;
-		int yInset = 31;
-
-		IGridMap gridMap = GridMapViewer.createGridMap(lineMap, xJunctions, yJunctions, xInset, yInset, junctionSeparation);
+		LineMap lineMap = MapUtils.create2015Map1();
+		IGridMap gridMap = new NicksGridMap(12, 8, 15, 15, 30, lineMap);
 
 		// the starting position of the robot for the simulation. This is not
 		// known in the action model or position distribution
@@ -180,7 +165,7 @@ public class MarkovLocalisationSkeleton {
 		// SimulatedRobot robot = SimulatedRobot.createSingleSensorRobot(
 		// startPose, lineMap);
 
-		MarkovLocalisationSkeleton ml = new MarkovLocalisationSkeleton(robot, lineMap, gridMap, junctionSeparation);
+		MarkovLocalisationSkeleton ml = new MarkovLocalisationSkeleton(robot, lineMap, gridMap, 30);
 		ml.visualise();
 		ml.run();
 
