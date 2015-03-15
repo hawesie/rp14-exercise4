@@ -9,7 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class GridPositionDistributionVisualisation extends LineMapVisualisation {
+public class GridPositionDistributionVisualisation extends GridMapVisualisation {
 
 	/**
 	 *
@@ -21,7 +21,7 @@ public class GridPositionDistributionVisualisation extends LineMapVisualisation 
 	protected GridPositionDistribution m_gridDistribution;
 
 	public GridPositionDistributionVisualisation(GridPositionDistribution _distribution, LineMap _lineMap, float _scaleFactor, boolean _flip) {
-		super(_lineMap, _scaleFactor, _flip);
+		super(_distribution.getGridMap(), _lineMap, _scaleFactor, _flip);
 		m_gridDistribution = _distribution;
 	}
 
