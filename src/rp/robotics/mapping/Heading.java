@@ -75,10 +75,10 @@ public enum Heading {
 
 	// Returns the number of degrees to turn to face the target
 	public int toDegrees() {
-		if (val < 3)
+		if (val < 2)
 			return val * 90;
 		else
-			return -90;
+			return (val - 4) * -90;
 	}
 
 	@Override
