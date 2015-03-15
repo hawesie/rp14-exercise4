@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+@SuppressWarnings("deprecation")
 public class GridMapTest {
 
 	/***
@@ -102,6 +103,7 @@ public class GridMapTest {
 		return createGridMap(new RPLineMap(lineArray, new Rectangle(0, 0, width, height)), xJunctions, yJunctions, xInset, yInset, junctionSeparation);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testMapTest() {
 
@@ -193,6 +195,7 @@ public class GridMapTest {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean isManuallyApproved(Point _from, Point _to, HashMap<Point, Point> _invalid) {
 
 		Point to = _invalid.get(_from);
@@ -269,7 +272,7 @@ public class GridMapTest {
 
 		// copied from above method
 		float height = 238;
-		// float width = 366;
+		float width = 366;
 
 		// position of 0,0 junction wrt to top left of map
 		int xInset = 24;
