@@ -78,7 +78,7 @@ public enum Heading {
 		if (val < 2)
 			return val * 90;
 		else
-			return (val - 4) * -90;
+			return (val - 4) * 90;
 	}
 
 	@Override
