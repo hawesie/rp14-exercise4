@@ -137,6 +137,7 @@ public class LineMapVisualisation extends JComponent {
 		g2.fill(rectFill);
 
 		renderMap(g2);
+		renderRobot(g2);
 	}
 
 	protected void renderMap(Graphics2D g2) {
@@ -158,7 +159,8 @@ public class LineMapVisualisation extends JComponent {
 			g2.drawString("(" + mapWidth + ",0)", scale(mapWidth) + X_MARGIN, -Y_MARGIN * 2 - 10);
 
 		}
-
+	}
+	protected void renderRobot(Graphics2D g2) {
 		for (PoseProvider pp : m_poseProviders)
 			renderPose(pp.getPose(), g2);
 
@@ -173,19 +175,16 @@ public class LineMapVisualisation extends JComponent {
 			for (RangeReading reading : readings) {
 				float range = reading.getRange();
 
+				g2.setStroke(new BasicStroke(2));
 				if (range == 255) {
-					g2.setStroke(new BasicStroke(1));
 					g2.setPaint(Color.RED);
 					range = 20;
 				}
-				else {
-					g2.setStroke(new BasicStroke(1));
-					g2.setPaint(Color.BLUE);
-				}
+				else
+					g2.setPaint(Color.GREEN);
 				drawLineToHeading(g2, p.getX(), p.getY(), p.getHeading() + reading.getAngle(), range);
 			}
 		}
-
 	}
 
 	private void drawLineToHeading(Graphics2D g2, double _x, double _y, double heading, double _lineLength) {
