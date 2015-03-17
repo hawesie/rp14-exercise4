@@ -78,9 +78,9 @@ public class GridMapVisualisation extends LineMapVisualisation {
 		g2.setStroke(new BasicStroke(3));
 		g2.setColor(Color.RED);
 		Point a, b;
-		a = m_gridMap.getCoordinatesOfGridPosition(path.get(0).payload.x, path.get(0).payload.y);
+		a = m_gridMap.getCoordinatesOfGridPosition(path.get(0).getPayload().x, path.get(0).getPayload().y);
 		for (int i = 1; i < path.size(); i++) {
-			Coordinate bp = path.get(i).payload;
+			Coordinate bp = path.get(i).getPayload();
 			b = m_gridMap.getCoordinatesOfGridPosition(bp.x, bp.y);
 			renderLine(a, b, g2);
 			a = b;
