@@ -5,9 +5,8 @@ import java.awt.event.WindowListener;
 
 /***
  * Convenience class to kill Java when a window is closed.
- * 
- * @author nah
  *
+ * @author nah
  */
 public class KillMeNow implements WindowListener {
 

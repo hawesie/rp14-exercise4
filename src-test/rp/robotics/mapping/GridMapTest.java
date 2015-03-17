@@ -1,45 +1,35 @@
 package rp.robotics.mapping;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import lejos.geom.Line;
+import lejos.geom.Rectangle;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import lejos.geom.Line;
-import lejos.geom.Rectangle;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
+@SuppressWarnings("deprecation")
 public class GridMapTest {
 
 	/***
-	 * Create an instance of an object that implements IGridMap from a LineMap.
-	 * You should copy this test file to your own project and replace
-	 * NicksGridMap with you own implementation.
-	 * 
-	 * @param _lineMap
-	 *            The underlying line map
-	 * @param _gridXSize
-	 *            How many grid positions along the x axis
-	 * @param _gridYSize
-	 *            How many grid positions along the y axis
-	 * @param _xStart
-	 *            The x coordinate where grid position (0,0) starts
-	 * @param _yStart
-	 *            The y coordinate where grid position (0,0) starts
-	 * @param _cellSize
-	 *            The distance between grid positions
+	 * Create an instance of an object that implements IGridMap from a LineMap. You should copy this test file to your own project and replace NicksGridMap with you own implementation.
+	 *
+	 * @param _lineMap The underlying line map
+	 * @param _gridXSize How many grid positions along the x axis
+	 * @param _gridYSize How many grid positions along the y axis
+	 * @param _xStart The x coordinate where grid position (0,0) starts
+	 * @param _yStart The y coordinate where grid position (0,0) starts
+	 * @param _cellSize The distance between grid positions
 	 * @return
 	 */
-	public static IGridMap createGridMap(RPLineMap _lineMap, int _gridXSize,
-			int _gridYSize, float _xStart, float _yStart, float _cellSize) {
-		return new NicksGridMap(_gridXSize, _gridYSize, _xStart, _yStart,
-				_cellSize, _lineMap);
+	public static IGridMap createGridMap(RPLineMap _lineMap, int _gridXSize, int _gridYSize, float _xStart, float _yStart, float _cellSize) {
+		return new NicksGridMap(_gridXSize, _gridYSize, _xStart, _yStart, _cellSize, _lineMap);
 	}
 
-	public static IGridMap createRectangularGridMap(int _xJunctions,
-			int _yJunctions, float _pointSeparation) {
+	public static IGridMap createRectangularGridMap(int _xJunctions, int _yJunctions, float _pointSeparation) {
 
 		int xInset = (int) (_pointSeparation / 2);
 		int yInset = (int) (_pointSeparation / 2);
@@ -58,14 +48,12 @@ public class GridMapTest {
 		Line[] lineArray = new Line[lines.size()];
 		lines.toArray(lineArray);
 
-		return createGridMap(new RPLineMap(lineArray, new Rectangle(0, 0,
-				_width, _height)), _xJunctions, _yJunctions, xInset, yInset,
-				_pointSeparation);
+		return createGridMap(new RPLineMap(lineArray, new Rectangle(0, 0, _width, _height)), _xJunctions, _yJunctions, xInset, yInset, _pointSeparation);
 	}
 
 	/**
 	 * Creates a grid map to match the training map as of 6/3/2013.
-	 * 
+	 *
 	 * @return
 	 */
 	public static IGridMap createTestMap() {
@@ -112,11 +100,10 @@ public class GridMapTest {
 		Line[] lineArray = new Line[lines.size()];
 		lines.toArray(lineArray);
 
-		return createGridMap(new RPLineMap(lineArray, new Rectangle(0, 0,
-				width, height)), xJunctions, yJunctions, xInset, yInset,
-				junctionSeparation);
+		return createGridMap(new RPLineMap(lineArray, new Rectangle(0, 0, width, height)), xJunctions, yJunctions, xInset, yInset, junctionSeparation);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testMapTest() {
 
@@ -155,92 +142,69 @@ public class GridMapTest {
 		invalid.put(new Point(6, 5), new Point(6, 6));
 		invalid.put(new Point(7, 5), new Point(7, 6));
 
-		for (int y = 0; y < height; y++) {
-
+		for (int y = 0; y < height; y++)
 			for (int x = 0; x < width; x++) {
 
 				Point from = new Point(x, y);
 
-				if (blocked.contains(from)) {
-
+				if (blocked.contains(from))
 					// an in place transition should be fine
-					Assert.assertFalse(map.isValidTransition(from.x, from.y,
-							from.x, from.y));
-				} else {
+					Assert.assertFalse(map.isValidTransition(from.x, from.y, from.x, from.y));
+				else {
 					if (x > 0) {
 
 						Point to = new Point(x - 1, y);
 
-						if (blocked.contains(to)
-								|| !isManuallyApproved(from, to, invalid)) {
-							Assert.assertFalse(map.isValidTransition(from.x,
-									from.y, to.x, to.y));
-						} else {
-							Assert.assertTrue(map.isValidTransition(from.x,
-									from.y, to.x, to.y));
-						}
+						if (blocked.contains(to) || !isManuallyApproved(from, to, invalid))
+							Assert.assertFalse(map.isValidTransition(from.x, from.y, to.x, to.y));
+						else
+							Assert.assertTrue(map.isValidTransition(from.x, from.y, to.x, to.y));
 					}
 
 					if (x < width - 1) {
 
 						Point to = new Point(x + 1, y);
 
-						if (blocked.contains(to)
-								|| !isManuallyApproved(from, to, invalid)) {
-							Assert.assertFalse(map.isValidTransition(from.x,
-									from.y, to.x, to.y));
-						} else {
-							Assert.assertTrue(map.isValidTransition(from.x,
-									from.y, to.x, to.y));
-						}
+						if (blocked.contains(to) || !isManuallyApproved(from, to, invalid))
+							Assert.assertFalse(map.isValidTransition(from.x, from.y, to.x, to.y));
+						else
+							Assert.assertTrue(map.isValidTransition(from.x, from.y, to.x, to.y));
 					}
 
 					if (y > 0) {
 
 						Point to = new Point(x, y - 1);
 
-						if (blocked.contains(to)
-								|| !isManuallyApproved(from, to, invalid)) {
-							Assert.assertFalse(map.isValidTransition(from.x,
-									from.y, to.x, to.y));
-						} else {
-							Assert.assertTrue(map.isValidTransition(from.x,
-									from.y, to.x, to.y));
-						}
+						if (blocked.contains(to) || !isManuallyApproved(from, to, invalid))
+							Assert.assertFalse(map.isValidTransition(from.x, from.y, to.x, to.y));
+						else
+							Assert.assertTrue(map.isValidTransition(from.x, from.y, to.x, to.y));
 					}
 
 					if (y < height - 1) {
 
 						Point to = new Point(x, y + 1);
 
-						if (blocked.contains(to)
-								|| !isManuallyApproved(from, to, invalid)) {
-							Assert.assertFalse(map.isValidTransition(from.x,
-									from.y, to.x, to.y));
-						} else {
-							Assert.assertTrue(map.isValidTransition(from.x,
-									from.y, to.x, to.y), "from " + from
-									+ " to " + to);
-						}
+						if (blocked.contains(to) || !isManuallyApproved(from, to, invalid))
+							Assert.assertFalse(map.isValidTransition(from.x, from.y, to.x, to.y));
+						else
+							Assert.assertTrue(map.isValidTransition(from.x, from.y, to.x, to.y), "from " + from + " to " + to);
 					}
 				}
 			}
-		}
 
 	}
 
-	private boolean isManuallyApproved(Point _from, Point _to,
-			HashMap<Point, Point> _invalid) {
+	@SuppressWarnings("deprecation")
+	private boolean isManuallyApproved(Point _from, Point _to, HashMap<Point, Point> _invalid) {
 
 		Point to = _invalid.get(_from);
-		if (to != null && to.equals(_to)) {
+		if (to != null && to.equals(_to))
 			return false;
-		}
 
 		Point from = _invalid.get(_to);
-		if (from != null && from.equals(_from)) {
+		if (from != null && from.equals(_from))
 			return false;
-		}
 
 		return true;
 	}
@@ -252,8 +216,7 @@ public class GridMapTest {
 
 		IGridMap map = createRectangularGridMap(width, height, 30);
 
-		for (int y = 0; y < height; y++) {
-
+		for (int y = 0; y < height; y++)
 			for (int x = 0; x < width; x++) {
 
 				int toX = x;
@@ -292,7 +255,6 @@ public class GridMapTest {
 				}
 
 			}
-		}
 	}
 
 	@Test
@@ -301,18 +263,10 @@ public class GridMapTest {
 		float sep = 30f;
 		float target = sep / 2f;
 		IGridMap map = createRectangularGridMap(1, 1, sep);
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.PLUS_X)), target, 0f);
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.PLUS_Y)), target, 0f);
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.MINUS_X)), target, 0f);
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.MINUS_Y)), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.RIGHT.toDegrees()), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.UP.toDegrees()), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.LEFT.toDegrees()), target, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.DOWN.toDegrees()), target, 0f);
 
 		map = createTestMap();
 
@@ -324,21 +278,9 @@ public class GridMapTest {
 		int xInset = 24;
 		int yInset = 24;
 
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.PLUS_X)), 233f, 0f);
-
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.PLUS_Y)), height - yInset, 0f);
-
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.MINUS_X)), xInset, 0f);
-
-		Assert.assertEquals(
-				map.rangeToObstacleFromGridPosition(0, 0,
-						Heading.toDegrees(Heading.MINUS_Y)), yInset, 0f);
-
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.RIGHT.toDegrees()), 233f, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.UP.toDegrees()), height - yInset, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.LEFT.toDegrees()), xInset, 0f);
+		Assert.assertEquals(map.rangeToObstacleFromGridPosition(0, 0, Heading.DOWN.toDegrees()), yInset, 0f);
 	}
 }
