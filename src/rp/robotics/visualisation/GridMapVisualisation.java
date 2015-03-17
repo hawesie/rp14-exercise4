@@ -71,7 +71,7 @@ public class GridMapVisualisation extends LineMapVisualisation {
 
 	}
 
-	public void setPath(List<Node<Coordinate>> path) {
+	public void setPath(List<Coordinate> path) {
 		this.path = path;
 	}
 	public void drawPath(Graphics2D g2) {
