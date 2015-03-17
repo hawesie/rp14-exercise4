@@ -18,13 +18,13 @@ public enum Heading {
 	public Coordinate toCoordinate() {
 		switch (val) {
 			case 0:
-				return new Coordinate(0, 1);
-			case 1:
 				return new Coordinate(1, 0);
-			case 2:
+			case 1:
 				return new Coordinate(0, -1);
-			case 3:
+			case 2:
 				return new Coordinate(-1, 0);
+			case 3:
+				return new Coordinate(0, 1);
 			default:
 				throw new IllegalArgumentException("Whut just happened?!"); // Should never get to here
 		}
@@ -34,16 +34,16 @@ public enum Heading {
 		if (x != 0)
 			switch ((short) Math.signum(x)) {
 				case -1:
-					return LEFT;
+					return DOWN;
 				case 1:
-					return RIGHT;
+					return UP;
 			}
 		else if (y != 0)
 			switch ((short) Math.signum(y)) {
 				case -1:
-					return DOWN;
+					return RIGHT;
 				case 1:
-					return UP;
+					return LEFT;
 			}
 
 		throw new IllegalArgumentException("X or Y must be 0");
@@ -53,13 +53,13 @@ public enum Heading {
 		heading += 4;    // This fixes negative numbers giving unexpected values with modulo
 		switch (heading % 4) {
 			case 0:
-				return UP;
-			case 1:
-				return RIGHT;
-			case 2:
-				return DOWN;
-			case 3:
 				return LEFT;
+			case 1:
+				return UP;
+			case 2:
+				return RIGHT;
+			case 3:
+				return DOWN;
 			default:
 				throw new IllegalArgumentException("No heading");
 		}
@@ -86,13 +86,13 @@ public enum Heading {
 	public String toString() {
 		switch (val) {
 			case 0:
-				return "Up";
-			case 1:
-				return "Right";
-			case 2:
-				return "Down";
-			case 3:
 				return "Left";
+			case 1:
+				return "Up";
+			case 2:
+				return "Right";
+			case 3:
+				return "Down";
 			default:
 				return "No Direction";
 		}
