@@ -214,29 +214,31 @@ public class SimulatedMotor implements RegulatedMotor {
 		m_direction = _direction;
 		m_isMoving = true;
 
-		m_moveThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				move(_tachoPredicate);
-
-			}
-		});
-		m_regulateThread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				regulate();
-
-			}
-		});
-
-		m_moveThread.setPriority(10);
-		m_regulateThread.setPriority(8);
-
-		m_moveThread.setDaemon(true);
-		m_regulateThread.setDaemon(true);
-		m_moveThread.start();
-		m_regulateThread.start();
+		synchronized (this) {
+			m_moveThread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					move(_tachoPredicate);
+	
+				}
+			});
+			m_regulateThread = new Thread(new Runnable() {
+	
+				@Override
+				public void run() {
+					regulate();
+	
+				}
+			});
+	
+			m_moveThread.setPriority(10);
+			m_regulateThread.setPriority(8);
+	
+			m_moveThread.setDaemon(true);
+			m_regulateThread.setDaemon(true);
+			m_moveThread.start();
+			m_regulateThread.start();
+		}
 	}
 
 	@Override
